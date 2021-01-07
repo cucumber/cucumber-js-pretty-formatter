@@ -1,37 +1,35 @@
-# Cucumber Pretty
+# Cucumber Pretty Formatter
 
 [![build][build-badge]][build]
 [![npm][version]][npm]
 [![npm][downloads]][npm]
 
-[build]: https://github.com/jbpros/cucumber-pretty/actions?query=workflow%3Abuild
-[build-badge]: https://github.com/jbpros/cucumber-pretty/workflows/build/badge.svg
-[npm]: https://www.npmjs.com/package/cucumber-pretty
-[version]: https://img.shields.io/npm/v/cucumber-pretty.svg
-[downloads]: https://img.shields.io/npm/dm/cucumber-pretty.svg
+[build]: https://github.com/jbpros/cucumber-pretty-formatter/actions?query=workflow%3Abuild
+[build-badge]: https://github.com/jbpros/cucumber-pretty-formatter/workflows/build/badge.svg
+[npm]: https://www.npmjs.com/package/@cucumber/pretty-formatter
+[version]: https://img.shields.io/npm/v/@cucumber/pretty-formatter.svg
+[downloads]: https://img.shields.io/npm/dm/@cucumber/pretty-formatter.svg
 
-Cucumber.js pretty formatter implementing event protocol.
+The Cucumber.js pretty formatter logs your feature suite in its original Gherkin form. It offers custom style themes.
 
-Built with 🥒 by [Ilya Kozhevnikov](http://kozhevnikov.com/).
+## Install
 
-## Use
+The pretty formatter requires:
 
-```bash
-npm i cucumber-pretty
-cucumber-js -f node_modules/cucumber-pretty
-```
+- Node.js 10, 12, 14 or 15.
+- [Cucumber.js](https://www.npmjs.com/package/@cucumber/cucumber) 7.0 and above.
 
-- For Cucumber.js versions 1 and 2 use `-f pretty`
-- For Cucumber.js versions 3 to 5 use `cucumber-pretty@1.5`
-- For Cucumber.js version 6 use `cucumber-pretty@6`
-- The pretty formatter is [not yet compatible with Cucumber.js 7](https://github.com/kozhevnikov/cucumber-pretty/issues/14).
+    npm install --save-dev @cucumber/pretty-formatter @cucumber/cucumber
 
-## References
+There are pretty formatters for [older versions of Cucumber](#older-cucumber-versions).
 
-- https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#formats
-- https://github.com/cucumber/cucumber-js/blob/master/docs/custom_formatters.md
+## Usage
 
-## Customise the theme
+    cucumber-js -f @cucumber/pretty-formatter
+
+We recommend using [Cucumber profiles](https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#profiles) to [specify formatters](https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#formats).
+
+## Theme customisation
 
 You can define your own colors by passing a `theme` format option:
 
@@ -43,7 +41,7 @@ Where `THEME_JSON` is in the following shape:
 {"feature keyword": ["magenta", "bold"], "scenario keyword": ["red"]}
 ```
 
-The currently known theme items are:
+The customisable theme items are:
 
 * `datatable border`
 * `datatable content`
@@ -53,6 +51,7 @@ The currently known theme items are:
 * `feature description`
 * `feature keyword`
 * `feature name`
+* `location`: location comments added to the right of feature and scenario names
 * `rule keyword`
 * `rule name`
 * `scenario keyword`
@@ -67,16 +66,46 @@ You can combine all the styles you'd like from [modifiers, foreground colors and
 
 ### Example Themes
 
-_Matrix_:
+#### _Matrix_
+
+It could be called *eco-friendly*, cuz it's very green:
 
     --format-options '{"theme":{"datatable border":["green"],"datatable content":["green","italic"],"docstring content":["green","italic"],"docstring delimiter":["green"],"feature description":["green"],"feature keyword":["bold","green"],"rule keyword":["yellow"],"scenario keyword":["greenBright"],"scenario name":["green","underline"],"step keyword":["bgGreen","black","italic"],"step text":["greenBright","italic"],"tag":["green"]}}'
 
-_Original pretty_:
+#### _Legacy pretty_
 
-This was the default theme, pre-Cucumber.js 7.x.
+This was the theme offered by [Ilya Kozhevnikov](http://kozhevnikov.com/)'s pretty formatter, pre-Cucumber.js 7.x.
 
 <img src="https://raw.githubusercontent.com/kozhevnikov/cucumber-pretty/master/docs/homebrew.png" width="300">
 <img src="https://raw.githubusercontent.com/kozhevnikov/cucumber-pretty/master/docs/basic.png" width="300">
 
     --format-options '{"theme":{"feature keyword":["magenta","bold"],"scenario keyword":["magenta","bold"],"step keyword":["bold"]}}'
 
+### We need more themes
+
+Please share your creations by forking, adding the theme to this section of the README and [opening a pull request](https://github.com/jbpros/cucumber-pretty-formatter/pulls).
+
+## Older Cucumber versions
+
+If you're using an older version of Cucumber.js, you'll need to use one of the previous pretty formatters:
+
+### Cucumber.js 1 → 2
+
+The original pretty formatter used to ship with Cucumber. Simply specify it when invoking Cucumber:
+
+    cucumber-js -f pretty
+
+### Cucumber.js 3 → 6
+
+You can install [`cucumber-pretty`](https://www.npmjs.com/package/cucumber-pretty), created by [Ilya Kozhevnikov](http://kozhevnikov.com/).
+
+- Cucumber.js 3, 4, 5: `npm i --save-dev cucumber-pretty@1.5`
+- Cucumber.js 6: `npm i --save-dev cucumber-pretty@6`
+
+Tell Cucumber to use it:
+
+    cucumber-js -f cucumber-pretty
+
+## Credits
+
+This project is based on the [original work](https://github.com/kozhevnikov/cucumber-pretty) of [Ilya Kozhevnikov](http://kozhevnikov.com/). It got migrated to TypeScript, upgraded for Cucumber.js 7+ that exposes [cucumber-messages](https://github.com/cucumber/cucumber/tree/master/messages) and is currently maintained by [Julien Biezemans](https://github.com/jbpros/) and the [Cucumber team](https://github.com/cucumber).
