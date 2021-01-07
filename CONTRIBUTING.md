@@ -31,8 +31,7 @@ _The following is a checklist for maintainers when preparing a new release_
 
 ### Major releases
 
-We will always make a release candidate before issuing a major release. The release candidate will be available for at least a month to give users
-time to validate that there are no unexpected breaking changes.
+We will always make a release candidate before issuing a major release. The release candidate will be available for at least a month to give users time to validate that there are no unexpected breaking changes.
 
 ### Process
 
