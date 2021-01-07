@@ -1,4 +1,4 @@
-# Cucumber Pretty Formatter
+# Official Cucumber.js Pretty Formatter
 
 [![build][build-badge]][build]
 [![npm][version]][npm]
