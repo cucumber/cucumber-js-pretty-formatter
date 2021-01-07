@@ -29,7 +29,8 @@
     "test:mocha:wip:watch": "mocha -w -g wip",
     "test:mocha:wip": "mocha -g wip",
     "test:mocha": "mocha",
-    "test": "npm run test:mocha"
+    "test": "npm run test:mocha",
+    "update-dependencies": "npx npm-check-updates --upgrade --dep prod,dev,optional,bundle"
   },
   "dependencies": {
     "@cucumber/messages": "^13.2.1",
