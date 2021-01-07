@@ -48,7 +48,9 @@ Inside the container, update dependencies:
 
     npm run update-dependencies
     npm install
-    npm test
+    npm build:release
+
+That last command will build, run the tests and remove test files from the package to be published.
 
 If the tests fail, update your code to be compatible with the new libraries, or revert the library upgrades that break the build.
 
