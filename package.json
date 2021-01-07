@@ -4,6 +4,10 @@
   "description": "Cucumber.js Pretty Formatter",
   "repository": "https://github.com/kozhevnikov/cucumber-pretty",
   "author": "Ilya Kozhevnikov <git@kozhevnikov.com>",
+  "contributors": [
+    "Ilya Kozhevnikov <git@kozhevnikov.com>",
+    "Julien Biezemans <jb@jbpros.com>"
+  ],
   "license": "MIT",
   "main": "lib/src/index.js",
   "types": "lib/src/index.d.ts",
