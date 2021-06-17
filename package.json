@@ -35,7 +35,7 @@
     "update-dependencies": "npx npm-check-updates --upgrade --dep prod,dev,optional,bundle"
   },
   "dependencies": {
-    "@cucumber/messages": "^13.2.1",
+    "@cucumber/messages": "^16.0.1",
     "ansi-styles": "^5.0.0",
     "cli-table3": "^0.6.0",
     "figures": "^3.2.0",
