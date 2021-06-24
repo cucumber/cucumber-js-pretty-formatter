@@ -7,7 +7,7 @@ import {
   getGherkinStepMap,
 } from '@cucumber/cucumber/lib/formatter/helpers/gherkin_document_parser'
 import { getPickleStepMap } from '@cucumber/cucumber/lib/formatter/helpers/pickle_parser'
-import { messages } from '@cucumber/messages'
+import * as messages from '@cucumber/messages'
 import * as CliTable3 from 'cli-table3'
 import { cross, tick } from 'figures'
 import { EOL as n } from 'os'
@@ -22,6 +22,7 @@ const marks = {
   [Status.PENDING]: '?',
   [Status.SKIPPED]: '-',
   [Status.UNDEFINED]: '?',
+  [Status.UNKNOWN]: '?',
 }
 
 const defaultThemeStyles: ThemeStyles = {
@@ -141,7 +142,7 @@ export default class PrettyFormatter extends SummaryFormatter {
       this.onTestCaseFinished(envelope.testCaseFinished)
   }
 
-  private onTestCaseStarted(testCaseStarted: messages.ITestCaseStarted) {
+  private onTestCaseStarted(testCaseStarted: messages.TestCaseStarted) {
     const {
       gherkinDocument,
       pickle,
@@ -167,7 +168,7 @@ export default class PrettyFormatter extends SummaryFormatter {
     this.renderScenarioHead(gherkinDocument, pickle)
   }
 
-  private onTestStepStarted(testStepStarted: messages.ITestStepStarted) {
+  private onTestStepStarted(testStepStarted: messages.TestStepStarted) {
     const {
       gherkinDocument,
       pickle,
@@ -182,7 +183,7 @@ export default class PrettyFormatter extends SummaryFormatter {
       (item) => item.id === testStepStarted.testStepId
     )
 
-    if (testStep && testStep.pickleStepId !== '') {
+    if (testStep && testStep.pickleStepId) {
       const pickleStep = pickleStepMap[testStep.pickleStepId]
       const astNodeId = pickleStep.astNodeIds[0]
       const gherkinStep = gherkinStepMap[astNodeId]
@@ -209,11 +210,10 @@ export default class PrettyFormatter extends SummaryFormatter {
       if (gherkinStep.dataTable) {
         const datatable = new CliTable3(this.tableLayout)
         datatable.push(
-          ...gherkinStep.dataTable.rows.map(
-            (row: messages.GherkinDocument.Feature.ITableRow) =>
-              (row.cells || []).map((cell) =>
-                this.styleItem(0, ThemeItem.DataTableContent, cell.value || '')
-              )
+          ...gherkinStep.dataTable.rows.map((row: messages.TableRow) =>
+            (row.cells || []).map((cell) =>
+              this.styleItem(0, ThemeItem.DataTableContent, cell.value || '')
+            )
           )
         )
         this.logItem(ThemeItem.DataTable, datatable.toString())
@@ -222,7 +222,7 @@ export default class PrettyFormatter extends SummaryFormatter {
     }
   }
 
-  private onTestStepFinished(testStepFinished: messages.ITestStepFinished) {
+  private onTestStepFinished(testStepFinished: messages.TestStepFinished) {
     const { message, status } = testStepFinished.testStepResult || {}
 
     if (status && status !== Status.PASSED) {
@@ -241,14 +241,11 @@ export default class PrettyFormatter extends SummaryFormatter {
     }
   }
 
-  private onTestCaseFinished(_testCaseFinished: messages.ITestCaseFinished) {
+  private onTestCaseFinished(_testCaseFinished: messages.TestCaseFinished) {
     this.newline()
   }
 
-  private renderTags(
-    indent: number,
-    tags: messages.GherkinDocument.Feature.ITag[]
-  ) {
+  private renderTags(indent: number, tags: readonly { name: string }[]) {
     const tagStrings = tags.reduce<string[]>(
       (tags, tag) => (tag.name ? [...tags, tag.name] : tags),
       []
@@ -264,7 +261,7 @@ export default class PrettyFormatter extends SummaryFormatter {
     }
   }
 
-  private renderFeatureHead(feature: messages.GherkinDocument.IFeature) {
+  private renderFeatureHead(feature: messages.Feature) {
     this.renderTags(0, feature.tags || [])
     this.logItem(ThemeItem.FeatureKeyword, feature.keyword || '[feature]', ':')
     this.log(' ')
@@ -286,7 +283,7 @@ export default class PrettyFormatter extends SummaryFormatter {
     this.newline()
   }
 
-  private renderRule(rule: messages.GherkinDocument.Feature.FeatureChild.Rule) {
+  private renderRule(rule: messages.Rule) {
     this.logItem(ThemeItem.RuleKeyword, rule.keyword, ':')
     this.log(' ')
     this.logItem(ThemeItem.RuleName, rule.name || '')
@@ -295,15 +292,14 @@ export default class PrettyFormatter extends SummaryFormatter {
   }
 
   private renderScenarioHead(
-    gherkinDocument: messages.IGherkinDocument,
-    pickle: messages.IPickle
+    gherkinDocument: messages.GherkinDocument,
+    pickle: messages.Pickle
   ) {
     this.renderTags(2, pickle.tags || [])
     const gherkinScenarioMap = getGherkinScenarioMap(gherkinDocument)
     if (!pickle.astNodeIds) throw new Error('Pickle AST nodes missing')
 
-    const scenario: messages.GherkinDocument.Feature.IScenario =
-      gherkinScenarioMap[pickle.astNodeIds[0]]
+    const scenario: messages.Scenario = gherkinScenarioMap[pickle.astNodeIds[0]]
     this.logItem(ThemeItem.ScenarioKeyword, scenario.keyword || '???', ':')
     this.log(' ')
     this.logItem(ThemeItem.ScenarioName, pickle.name || '')
