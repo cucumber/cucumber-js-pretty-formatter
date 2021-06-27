@@ -9,6 +9,7 @@ This document is formatted according to the principles of [Keep A CHANGELOG](htt
 Please visit [cucumber/CONTRIBUTING.md](https://github.com/cucumber/cucumber/blob/master/CONTRIBUTING.md) for more info on how to contribute to Cucumber.
 
 <!-- Releases -->
+
 ## [Unreleased] (In Git)
 
 ### Added
@@ -18,6 +19,10 @@ Please visit [cucumber/CONTRIBUTING.md](https://github.com/cucumber/cucumber/blo
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## [1.0.0-alpha.1](https://github.com/jbpros/cucumber-pretty-formatter/compare/v1.0.0-alpha.0...v1.0.0-alpha.1)
 
 ### Fixed
 
