@@ -9,11 +9,21 @@ This document is formatted according to the principles of [Keep A CHANGELOG](htt
 Please visit [cucumber/CONTRIBUTING.md](https://github.com/cucumber/cucumber/blob/master/CONTRIBUTING.md) for more info on how to contribute to Cucumber.
 
 <!-- Releases -->
-### [Unreleased](https://github.com/jbpros/cucumber-pretty-formatter/compare/v1.0.0-alpha.0...master)
+## [Unreleased] (In Git)
 
-* N/A
+### Added
 
-### [v1.0.0-alpha.0](https://github.com/jbpros/cucumber-pretty-formatter/compare/03f000d68098f854b9596f812a474857df675491...v1.0.0-alpha.0)
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+* Fix compatibility issues with cucumber-js 7.3.0 [#5](https://github.com/cucumber/cucumber-pretty-formatter/pull/5)
+
+## [v1.0.0-alpha.0](https://github.com/jbpros/cucumber-pretty-formatter/compare/03f000d68098f854b9596f812a474857df675491...v1.0.0-alpha.0)
 
 * This project has been forked from [kozhevnikov/cucumber-pretty](https://github.com/kozhevnikov/cucumber-pretty). Thank you Ilya for the work you've done! The objective of this fork is to provide Cucumber users with an officially supported pretty formatter for Cucumber.js.
 * This is the first version of the pretty formatter that supports Cucumber.js 7.0.0 and above, now based on [cucumber-messages](https://github.com/cucumber/cucumber/tree/master/messages) (instead of the now deceased event protocol).
