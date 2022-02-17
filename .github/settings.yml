@@ -11,4 +11,4 @@ teams:
     permission: push
 
   - name: cucumber-js
-    permission: maintain
+    permission: admin
