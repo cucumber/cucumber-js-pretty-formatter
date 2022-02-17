@@ -1,6 +1,9 @@
-import { Status, SummaryFormatter } from '@cucumber/cucumber'
-import { IFormatterOptions } from '@cucumber/cucumber/lib/formatter'
-import { formatLocation } from '@cucumber/cucumber/lib/formatter/helpers'
+import {
+  Status,
+  SummaryFormatter,
+  IFormatterOptions,
+  formatterHelpers,
+} from '@cucumber/cucumber'
 import {
   getGherkinExampleRuleMap,
   getGherkinScenarioMap,
@@ -14,6 +17,8 @@ import { EOL as n } from 'os'
 import dedent from 'ts-dedent'
 
 import { makeTheme, ThemeItem, ThemeStyles } from './theme'
+
+const { formatLocation } = formatterHelpers
 
 const marks = {
   [Status.AMBIGUOUS]: cross,
