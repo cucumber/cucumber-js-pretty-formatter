@@ -1,12 +1,9 @@
-import { Status, SummaryFormatter } from '@cucumber/cucumber'
-import { IFormatterOptions } from '@cucumber/cucumber/lib/formatter'
-import { formatLocation } from '@cucumber/cucumber/lib/formatter/helpers'
 import {
-  getGherkinExampleRuleMap,
-  getGherkinScenarioMap,
-  getGherkinStepMap,
-} from '@cucumber/cucumber/lib/formatter/helpers/gherkin_document_parser'
-import { getPickleStepMap } from '@cucumber/cucumber/lib/formatter/helpers/pickle_parser'
+  Status,
+  SummaryFormatter,
+  IFormatterOptions,
+  formatterHelpers,
+} from '@cucumber/cucumber'
 import * as messages from '@cucumber/messages'
 import * as CliTable3 from 'cli-table3'
 import { cross, tick } from 'figures'
@@ -14,6 +11,14 @@ import { EOL as n } from 'os'
 import dedent from 'ts-dedent'
 
 import { makeTheme, ThemeItem, ThemeStyles } from './theme'
+
+const { formatLocation, GherkinDocumentParser, PickleParser } = formatterHelpers
+const {
+  getGherkinExampleRuleMap,
+  getGherkinScenarioMap,
+  getGherkinStepMap,
+} = GherkinDocumentParser
+const { getPickleStepMap } = PickleParser
 
 const marks = {
   [Status.AMBIGUOUS]: cross,
