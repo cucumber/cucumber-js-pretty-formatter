@@ -1,0 +1,14 @@
+_extends: .github
+
+repository:
+  name: cucumber-js-pretty-formatter
+  description: Cucumber.js pretty formatter 
+
+teams:
+  # See https://docs.github.com/en/rest/reference/teams#add-or-update-team-repository-permissions for available options
+
+  - name: committers
+    permission: push
+
+  - name: cucumber-js
+    permission: maintain
