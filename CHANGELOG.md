@@ -22,6 +22,10 @@ Please visit [cucumber/CONTRIBUTING.md](https://github.com/cucumber/cucumber/blo
 
 ### Fixed
 
+## [1.0.0-alpha.2](https://github.com/jbpros/cucumber-pretty-formatter/compare/v1.0.0-alpha.1...v1.0.0-alpha.2)
+
+### Fixed
+
 * Replace `@cucumber/cucumber` deep imports with equivalents from main entry point
 
 ## [1.0.0-alpha.1](https://github.com/jbpros/cucumber-pretty-formatter/compare/v1.0.0-alpha.0...v1.0.0-alpha.1)
