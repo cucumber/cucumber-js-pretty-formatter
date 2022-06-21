@@ -3,8 +3,9 @@ import 'should'
 import { run } from './exec'
 
 describe('Background', () => {
-  it('does not log backgrounds', () => {
-    run('background.feature').should.startWith(
+  it('does not log backgrounds', async () => {
+    const result = await run('background.feature')
+    result.should.startWith(
       'Feature: Background # test/features/background.feature:1\n' +
         '\n' +
         '  Scenario: Background scenario # test/features/background.feature:6\n' +

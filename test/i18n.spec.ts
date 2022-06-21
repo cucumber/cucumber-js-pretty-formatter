@@ -3,10 +3,11 @@ import 'should'
 import { run } from './exec'
 
 describe('Internationalization', () => {
-  it('logs French', () => {
-    run('fr.feature', {
+  it('logs French', async () => {
+    const result = await run('fr.feature', {
       '--name': 'Nom du Scénario',
-    }).should.startWith(
+    })
+    result.should.startWith(
       'Fonctionnalité: Nom de la Fonctionnalité # test/features/fr.feature:2\n' +
         '\n' +
         '  Scénario: Nom du Scénario # test/features/fr.feature:4\n' +
@@ -15,8 +16,9 @@ describe('Internationalization', () => {
     )
   })
 
-  it('logs Russian', () => {
-    run('ru.feature', { '--name': 'Сценарий name' }).should.startWith(
+  it('logs Russian', async () => {
+    const result = await run('ru.feature', { '--name': 'Сценарий name' })
+    result.should.startWith(
       'Функция: Функция Name # test/features/ru.feature:2\n' +
         '\n' +
         '  Сценарий: Сценарий name # test/features/ru.feature:4\n' +

@@ -15,11 +15,11 @@ type RunOptions = {
 }
 type FinalRunOptions = RunOptionalOptions & Required<RunOptions>
 
-export const run = (
+export const run = async (
   fileName: string,
   options: RunOptions & RunOptionalOptions = {},
   throws = false
-): string => {
+): Promise<string> => {
   const { colorsEnabled, theme }: FinalRunOptions = {
     colorsEnabled: false,
     theme: {},

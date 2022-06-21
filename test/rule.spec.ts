@@ -3,7 +3,7 @@ import 'should'
 import { run } from './exec'
 
 describe('Rule', () => {
-  it('logs rules', () => {
+  it('logs rules', async () => {
     const expectedOutput =
       'Feature: Rule # test/features/rule.feature:1\n\
 \n\
@@ -19,10 +19,11 @@ describe('Rule', () => {
 \n\
     Scenario: Rule 2 scenario # test/features/rule.feature:13\n\
       Given noop\n'
-    run('rule.feature').should.startWith(expectedOutput)
+    const result = await run('rule.feature')
+    result.should.startWith(expectedOutput)
   })
 
-  it('logs background steps in rules', () => {
+  it('logs background steps in rules', async () => {
     const expectedOutput =
       'Feature: Rule background # test/features/rule-background.feature:1\n\
 \n\
@@ -31,11 +32,13 @@ describe('Rule', () => {
     Scenario: Rule 1 scenario # test/features/rule-background.feature:8\n\
       Given noop\n\
       Given noop\n'
-    run('rule-background.feature').should.startWith(expectedOutput)
+    const result = await run('rule-background.feature')
+    result.should.startWith(expectedOutput)
   })
 
-  it('offsets the scenario indentation', () => {
-    run('rule*.feature').should.startWith(
+  it('offsets the scenario indentation', async () => {
+    const result = await run('rule*.feature')
+    result.should.startWith(
       'Feature: Rule background # test/features/rule-background.feature:1\n\
 \n\
   Rule: the rule\n\

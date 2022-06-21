@@ -3,8 +3,9 @@ import 'should'
 import { run } from './exec'
 
 describe('Hook', () => {
-  it('does not log hooks', () => {
-    run('hook.feature').should.startWith(
+  it('does not log hooks', async () => {
+    const result = await run('hook.feature')
+    result.should.startWith(
       '[[[BeforeAll]]]\n' +
         'Feature: Hook # test/features/hook.feature:1\n' +
         '\n' +

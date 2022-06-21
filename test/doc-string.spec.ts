@@ -3,8 +3,9 @@ import 'should'
 import { run } from './exec'
 
 describe('Doc String', () => {
-  it('logs doc strings', () => {
-    run('doc-string.feature').should.containEql(
+  it('logs doc strings', async () => {
+    const result = await run('doc-string.feature')
+    result.should.containEql(
       '    When doc string:\n' +
         '      """\n' +
         '      foo\n' +
@@ -14,8 +15,9 @@ describe('Doc String', () => {
     )
   })
 
-  it('preserves doc string indentation', () => {
-    run('doc-string.feature').should.containEql(
+  it('preserves doc string indentation', async () => {
+    const result = await run('doc-string.feature')
+    result.should.containEql(
       '    When doc string:\n' +
         '      """\n' +
         '      foo\n' +
