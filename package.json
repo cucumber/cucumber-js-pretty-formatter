@@ -45,7 +45,7 @@
     "@cucumber/messages": "*"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^8.3.0",
+    "@cucumber/cucumber": "^8.3.1",
     "@cucumber/messages": "^19.1.0",
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.20",
