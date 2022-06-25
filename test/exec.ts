@@ -3,10 +3,10 @@ import {
   loadConfiguration,
   runCucumber,
 } from '@cucumber/cucumber/api'
-import glob from 'glob'
+import * as glob from 'glob'
 import { join } from 'path'
 import { PassThrough } from 'stream'
-import streamToString from 'stream-to-string'
+import * as streamToString from 'stream-to-string'
 import { promisify } from 'util'
 
 import { ThemeStyles } from '../src/theme'
