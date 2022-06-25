@@ -5,7 +5,7 @@ import { run } from './exec'
 describe('Internationalization', () => {
   it('logs French', async () => {
     const result = await run('fr.feature', {
-      '--name': 'Nom du Scénario',
+      name: ['Nom du Scénario'],
     })
     result.should.startWith(
       'Fonctionnalité: Nom de la Fonctionnalité # test/features/fr.feature:2\n' +
@@ -17,7 +17,7 @@ describe('Internationalization', () => {
   })
 
   it('logs Russian', async () => {
-    const result = await run('ru.feature', { '--name': 'Сценарий name' })
+    const result = await run('ru.feature', { name: ['Сценарий name'] })
     result.should.startWith(
       'Функция: Функция Name # test/features/ru.feature:2\n' +
         '\n' +

@@ -5,7 +5,7 @@ import {
   formatterHelpers,
 } from '@cucumber/cucumber'
 import * as messages from '@cucumber/messages'
-import * as CliTable3 from 'cli-table3'
+import CliTable3 from 'cli-table3'
 import { cross, tick } from 'figures'
 import { EOL as n } from 'os'
 import dedent from 'ts-dedent'

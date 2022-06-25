@@ -11,7 +11,13 @@ describe('Text styling', () => {
     name?: string,
     theme?: Partial<ThemeStyles>,
     throws = false
-  ) => run(fileName, { colorsEnabled: true, theme, '--name': name }, throws)
+  ) =>
+    run(
+      fileName,
+      { name: name ? [name] : undefined },
+      { colorsEnabled: true, theme },
+      throws
+    )
 
   it('fails with unknown styles', async () => {
     const theme: Partial<ThemeStyles> = {
@@ -23,9 +29,7 @@ describe('Text styling', () => {
       await runColored('step.feature', 'Step name', theme, true)
       throw new Error('Should have failed')
     } catch (error) {
-      error.stderr
-        .toString()
-        .should.containEql('Error: Unknown style "ultraviolet"')
+      error.toString().should.containEql('Error: Unknown style "ultraviolet"')
     }
   })
 
@@ -39,7 +43,7 @@ describe('Text styling', () => {
       await runColored('step.feature', 'Step name', theme, true)
       throw new Error('Should have failed')
     } catch (error) {
-      error.stderr
+      error
         .toString()
         .should.containEql('Error: Unknown theme item "unknown theme item"')
     }

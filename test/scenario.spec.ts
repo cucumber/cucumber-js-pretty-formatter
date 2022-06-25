@@ -4,14 +4,14 @@ import { run } from './exec'
 
 describe('Scenario', () => {
   it('logs scenario names', async () => {
-    const result = await run('scenario.feature', { '--name': 'Scenario name' })
+    const result = await run('scenario.feature', { name: ['Scenario name'] })
     result.should.containEql(
       '  Scenario: Scenario name # test/features/scenario.feature:3\n'
     )
   })
 
   it('logs new lines between scenarios', async () => {
-    const result = await run('scenario.feature', { '--name': 'Scenario \\d' })
+    const result = await run('scenario.feature', { name: ['Scenario \\d'] })
     result.should.containEql(
       'Feature: Scenario # test/features/scenario.feature:1\n' +
         '\n' +

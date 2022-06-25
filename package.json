@@ -29,7 +29,7 @@
     "lint": "eslint \"src/**/*.ts\" \"test/**/*.ts\"",
     "test:mocha:wip:watch": "mocha -w -g wip",
     "test:mocha:wip": "mocha -g wip",
-    "test:mocha": "mocha",
+    "test:mocha": "mocha --timeout 10000",
     "test:nobuild": "npm run test:mocha",
     "test": "npm run build && npm run test:mocha",
     "update-dependencies": "npx npm-check-updates --upgrade --dep prod,dev,optional,bundle"
@@ -47,6 +47,7 @@
   "devDependencies": {
     "@cucumber/cucumber": "^8.3.1",
     "@cucumber/messages": "^19.1.0",
+    "@types/glob": "^7.2.0",
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.20",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
@@ -56,9 +57,11 @@
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.3.1",
+    "glob": "^7.2.3",
     "mocha": "^8.2.1",
     "prettier": "^2.2.1",
     "should": "^13.2.3",
+    "stream-to-string": "^1.2.0",
     "typescript": "^4.1.3"
   }
 }
