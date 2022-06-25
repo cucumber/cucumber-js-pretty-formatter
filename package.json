@@ -29,7 +29,7 @@
     "lint": "eslint \"src/**/*.ts\" \"test/**/*.ts\"",
     "test:mocha:wip:watch": "mocha -w -g wip",
     "test:mocha:wip": "mocha -g wip",
-    "test:mocha": "mocha --timeout 10000",
+    "test:mocha": "mocha",
     "test:nobuild": "npm run test:mocha",
     "test": "npm run build && npm run test:mocha",
     "update-dependencies": "npx npm-check-updates --upgrade --dep prod,dev,optional,bundle"
