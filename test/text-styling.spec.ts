@@ -11,193 +11,218 @@ describe('Text styling', () => {
     name?: string,
     theme?: Partial<ThemeStyles>,
     throws = false
-  ) => run(fileName, { colorsEnabled: true, theme, '--name': name }, throws)
+  ) =>
+    run(
+      fileName,
+      { name: name ? [name] : undefined },
+      { colorsEnabled: true, theme },
+      throws
+    )
 
-  it('fails with unknown styles', () => {
+  it('fails with unknown styles', async () => {
     const theme: Partial<ThemeStyles> = {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       [ThemeItem.FeatureKeyword]: ['ultraviolet'],
     }
     try {
-      runColored('step.feature', 'Step name', theme, true)
+      await runColored('step.feature', 'Step name', theme, true)
       throw new Error('Should have failed')
     } catch (error) {
-      error.stderr
-        .toString()
-        .should.containEql('Error: Unknown style "ultraviolet"')
+      error.toString().should.containEql('Error: Unknown style "ultraviolet"')
     }
   })
 
-  it('fails with unknown theme items', () => {
+  it('fails with unknown theme items', async () => {
     const theme: Partial<ThemeStyles> = {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       ['unknown theme item']: ['red'],
     }
     try {
-      runColored('step.feature', 'Step name', theme, true)
+      await runColored('step.feature', 'Step name', theme, true)
       throw new Error('Should have failed')
     } catch (error) {
-      error.stderr
+      error
         .toString()
         .should.containEql('Error: Unknown theme item "unknown theme item"')
     }
   })
 
   describe('customizable items', () => {
-    it('styles feature keywords', () => {
-      runColored('feature.feature', 'Feature name', {
+    it('styles feature keywords', async () => {
+      const result = await runColored('feature.feature', 'Feature name', {
         [ThemeItem.FeatureKeyword]: ['red', 'italic'],
-      }).should.containEql(styleText('Feature:', 'red', 'italic'))
+      })
+      result.should.containEql(styleText('Feature:', 'red', 'italic'))
     })
 
-    it('styles feature names', () => {
-      runColored('feature.feature', 'Feature name', {
+    it('styles feature names', async () => {
+      const result = await runColored('feature.feature', 'Feature name', {
         [ThemeItem.FeatureName]: ['yellow', 'italic'],
-      }).should.containEql(styleText('The Feature', 'yellow', 'italic'))
+      })
+      result.should.containEql(styleText('The Feature', 'yellow', 'italic'))
     })
 
-    it('styles feature descriptions', () => {
-      runColored('description.feature', undefined, {
+    it('styles feature descriptions', async () => {
+      const result = await runColored('description.feature', undefined, {
         [ThemeItem.FeatureDescription]: ['bgGreen'],
-      }).should.containEql(
+      })
+      result.should.containEql(
         indentStyleText(2, '**I like**\nTo describe\nMy _features_', [
           'bgGreen',
         ])
       )
     })
 
-    it('styles feature tags', () => {
+    it('styles feature tags', async () => {
       const s = (tag: string) => styleText(tag, 'bgYellow')
-      runColored('tag.feature', 'Scenario tag', {
+      const result = await runColored('tag.feature', 'Scenario tag', {
         [ThemeItem.Tag]: ['bgYellow'],
-      }).should.containEql(`${s('@feature')} ${s('@tag')}\n`)
+      })
+      result.should.containEql(`${s('@feature')} ${s('@tag')}\n`)
     })
 
-    it('styles feature locations', () => {
+    it('styles feature locations', async () => {
       const s = (tag: string) => styleText(tag, 'bgYellow')
-      runColored('feature.feature', undefined, {
+      const result = await runColored('feature.feature', undefined, {
         [ThemeItem.Location]: ['bgYellow'],
-      }).should.containEql(`${s('# test/features/feature.feature:1')}\n`)
+      })
+      result.should.containEql(`${s('# test/features/feature.feature:1')}\n`)
     })
 
-    it('styles rule keywords', () => {
-      runColored('rule.feature', undefined, {
+    it('styles rule keywords', async () => {
+      const result = await runColored('rule.feature', undefined, {
         [ThemeItem.RuleKeyword]: ['yellow'],
-      }).should.containEql(`  ${styleText('Rule:', 'yellow')} first rule\n`)
+      })
+      result.should.containEql(`  ${styleText('Rule:', 'yellow')} first rule\n`)
     })
 
-    it('styles rule names', () => {
-      runColored('rule.feature', undefined, {
+    it('styles rule names', async () => {
+      const result = await runColored('rule.feature', undefined, {
         [ThemeItem.RuleName]: ['green'],
-      }).should.containEql(`  Rule: ${styleText('first rule', 'green')}\n`)
+      })
+      result.should.containEql(`  Rule: ${styleText('first rule', 'green')}\n`)
     })
 
-    it('styles scenario keywords', () => {
-      runColored('scenario.feature', 'Scenario name', {
+    it('styles scenario keywords', async () => {
+      const result = await runColored('scenario.feature', 'Scenario name', {
         [ThemeItem.ScenarioKeyword]: ['bgYellow'],
-      }).should.containEql(
+      })
+      result.should.containEql(
         `${styleText('Scenario:', 'bgYellow')} Scenario name`
       )
     })
 
-    it('styles scenario names', () => {
-      runColored('scenario.feature', 'Scenario name', {
+    it('styles scenario names', async () => {
+      const result = await runColored('scenario.feature', 'Scenario name', {
         [ThemeItem.ScenarioName]: ['bgMagenta'],
-      }).should.containEql(
+      })
+      result.should.containEql(
         `  Scenario: ${styleText('Scenario name', 'bgMagenta')}`
       )
     })
 
-    it('styles scenario locations', () => {
+    it('styles scenario locations', async () => {
       const s = (tag: string) => styleText(tag, 'bgYellow')
-      runColored('scenario.feature', 'Scenario name', {
+      const result = await runColored('scenario.feature', 'Scenario name', {
         [ThemeItem.Location]: ['bgYellow'],
-      }).should.containEql(
+      })
+      result.should.containEql(
         `Scenario: Scenario name ${s('# test/features/scenario.feature:3')}\n`
       )
     })
 
-    it('styles scenario tags', () => {
+    it('styles scenario tags', async () => {
       const s = (tag: string) => styleText(tag, 'bgBlue')
-      runColored('tag.feature', 'Scenario tag', {
+      const result = await runColored('tag.feature', 'Scenario tag', {
         [ThemeItem.Tag]: ['bgBlue'],
-      }).should.containEql(
+      })
+      result.should.containEql(
         `  ${s('@feature')} ${s('@tag')} ${s('@scenario')}\n`
       )
     })
 
-    it('styles step keywords', () => {
+    it('styles step keywords', async () => {
       const stepStyles: TextStyle[] = ['bgYellow', 'bold']
-      runColored('step.feature', 'Step name', {
+      const result = await runColored('step.feature', 'Step name', {
         [ThemeItem.StepKeyword]: stepStyles,
-      }).should.containEql(
+      })
+      result.should.containEql(
         `    ${styleText('Given', ...stepStyles)} noop\n` +
           `    ${styleText('When', ...stepStyles)} noop\n` +
           `    ${styleText('Then', ...stepStyles)} noop\n`
       )
     })
 
-    it('styles step text', () => {
+    it('styles step text', async () => {
       const stepStyles: TextStyle[] = ['bgYellow', 'bold']
-      runColored('step.feature', 'Step name', {
+      const result = await runColored('step.feature', 'Step name', {
         [ThemeItem.StepText]: stepStyles,
-      }).should.containEql(styleText('noop', ...stepStyles))
+      })
+      result.should.containEql(styleText('noop', ...stepStyles))
     })
 
-    it('styles step statuses', () => {
+    it('styles step statuses', async () => {
       const stepStyles: TextStyle[] = ['bgWhite']
       const s = (text: string) => styleText(text, ...stepStyles)
-      runColored('step.feature', 'Failed step', {
+      const result = await runColored('step.feature', 'Failed step', {
         [ThemeItem.StepStatus]: stepStyles,
-      }).should.containEql(`    ${s('\u001b[31m✖ failed\u001b[39m')}\n      `)
+      })
+      result.should.containEql(
+        `    ${s('\u001b[31m✖ failed\u001b[39m')}\n      `
+      )
     })
 
-    it('styles step messages', () => {
+    it('styles step messages', async () => {
       const stepStyles: TextStyle[] = ['bgCyan']
       const s = (text: string) => styleText(text, ...stepStyles)
-      runColored('step.feature', 'Failed step', {
+      const result = await runColored('step.feature', 'Failed step', {
         [ThemeItem.StepMessage]: stepStyles,
-      }).should.containEql(`      ${s('Error: FAILED')}\n      `)
+      })
+      result.should.containEql(`      ${s('Error: FAILED')}\n      `)
     })
 
-    it('styles DocString content and delimiters', () => {
-      runColored('doc-string.feature', undefined, {
+    it('styles DocString content and delimiters', async () => {
+      const result = await runColored('doc-string.feature', undefined, {
         [ThemeItem.DocStringDelimiter]: ['green', 'bgYellow'],
         [ThemeItem.DocStringContent]: ['red', 'bold'],
-      }).should.containEql(
+      })
+      result.should.containEql(
         `${indentStyleText(6, '"""', ['green', 'bgYellow'])}\n` +
           `${indentStyleText(6, 'foo\nbar', ['red', 'bold'])}\n` +
           `${indentStyleText(6, '"""', ['green', 'bgYellow'])}\n`
       )
     })
 
-    it('styles DataTables', () => {
+    it('styles DataTables', async () => {
       const styles: TextStyle[] = ['green', 'bgYellow']
-      runColored('data-table.feature', undefined, {
+      const result = await runColored('data-table.feature', undefined, {
         [ThemeItem.DataTable]: ['green', 'bgYellow'],
-      }).should.containEql(
+      })
+      result.should.containEql(
         `      ${styleText('│ foo   │ bar   │', ...styles)}\n` +
           `      ${styleText('│ lorem │ ipsum │', ...styles)}\n`
       )
     })
 
-    it('styles DataTable borders', () => {
+    it('styles DataTable borders', async () => {
       const border = styleText('│', 'green', 'bgYellow')
-      runColored('data-table.feature', undefined, {
+      const result = await runColored('data-table.feature', undefined, {
         [ThemeItem.DataTableBorder]: ['green', 'bgYellow'],
-      }).should.containEql(
+      })
+      result.should.containEql(
         `      ${border} foo   ${border} bar   ${border}\n` +
           `      ${border} lorem ${border} ipsum ${border}\n`
       )
     })
 
-    it('styles DataTable content', () => {
+    it('styles DataTable content', async () => {
       const styles: TextStyle[] = ['green', 'bgYellow']
-      runColored('data-table.feature', undefined, {
+      const result = await runColored('data-table.feature', undefined, {
         [ThemeItem.DataTableContent]: ['green', 'bgYellow'],
-      }).should.containEql(
+      })
+      result.should.containEql(
         `      │ ${styleText('foo', ...styles)}   │ ${styleText(
           'bar',
           ...styles
@@ -211,46 +236,40 @@ describe('Text styling', () => {
   })
 
   describe('non-customizable items (colored by Cucumber)', () => {
-    it('styles ambiguous steps', () => {
-      runColored('step.feature', 'Ambiguous step').should.containEql(
-        `    ${styleText('✖ ambiguous', 'red')}\n`
-      )
+    it('styles ambiguous steps', async () => {
+      const result = await runColored('step.feature', 'Ambiguous step')
+      result.should.containEql(`    ${styleText('✖ ambiguous', 'red')}\n`)
     })
 
-    it('styles failed steps', () => {
-      runColored('step.feature', 'Failed step').should.containEql(
-        `    ${styleText('✖ failed', 'red')}\n`
-      )
+    it('styles failed steps', async () => {
+      const result = await runColored('step.feature', 'Failed step')
+      result.should.containEql(`    ${styleText('✖ failed', 'red')}\n`)
     })
 
-    it('styles pending steps', () => {
-      runColored('step.feature', 'Pending step').should.containEql(
-        `    ${styleText('? pending', 'yellow')}\n`
-      )
+    it('styles pending steps', async () => {
+      const result = await runColored('step.feature', 'Pending step')
+      result.should.containEql(`    ${styleText('? pending', 'yellow')}\n`)
     })
 
-    it('styles undefined steps', () => {
-      runColored('step.feature', 'Undefined step').should.containEql(
-        `    ${styleText('? undefined', 'yellow')}\n`
-      )
+    it('styles undefined steps', async () => {
+      const result = await runColored('step.feature', 'Undefined step')
+      result.should.containEql(`    ${styleText('? undefined', 'yellow')}\n`)
     })
 
-    it('styles skipped steps', () => {
-      runColored('step.feature', 'Skipped step').should.containEql(
-        `    ${styleText('- skipped', 'cyan')}\n`
-      )
+    it('styles skipped steps', async () => {
+      const result = await runColored('step.feature', 'Skipped step')
+      result.should.containEql(`    ${styleText('- skipped', 'cyan')}\n`)
     })
 
-    it('styles errors', () => {
-      runColored('step.feature', 'Failed step').should.containEql(
-        `    ${styleText('Error: FAILED', 'red')}`
-      )
+    it('styles errors', async () => {
+      const result = await runColored('step.feature', 'Failed step')
+      result.should.containEql(`    ${styleText('Error: FAILED', 'red')}`)
     })
   })
 
   describe('default theme', () => {
     let runResult: string
-    before(() => (runResult = runColored('step.feature')))
+    before(async () => (runResult = await runColored('step.feature')))
 
     it('styles feature keywords', () =>
       runResult.should.containEql(styleText('Feature:', 'blueBright', 'bold')))

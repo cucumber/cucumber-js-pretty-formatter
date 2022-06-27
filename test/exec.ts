@@ -1,59 +1,64 @@
-import { execFileSync } from 'child_process'
+import {
+  IConfiguration,
+  loadConfiguration,
+  runCucumber,
+} from '@cucumber/cucumber/api'
+import * as glob from 'glob'
 import { join } from 'path'
+import { PassThrough } from 'stream'
+import * as streamToString from 'stream-to-string'
+import { promisify } from 'util'
 
 import { ThemeStyles } from '../src/theme'
 
-const cmd = 'node_modules/.bin/cucumber-js'
-
-type RunOptionalOptions = {
-  '--name'?: string
-  '--tags'?: string[]
+type FormatOptions = {
+  colorsEnabled: boolean
+  theme: Partial<ThemeStyles>
 }
-type RunOptions = {
-  colorsEnabled?: boolean
-  theme?: Partial<ThemeStyles>
-}
-type FinalRunOptions = RunOptionalOptions & Required<RunOptions>
 
-export const run = (
+export const run = async (
   fileName: string,
-  options: RunOptions & RunOptionalOptions = {},
+  cucumberOptions: Partial<IConfiguration> = {},
+  formatOptions: Partial<FormatOptions> = {},
   throws = false
-): string => {
-  const { colorsEnabled, theme }: FinalRunOptions = {
-    colorsEnabled: false,
-    theme: {},
-    ...options,
+): Promise<string> => {
+  // clear require cache for support code
+  const matches = await promisify(glob)('features/support/*', {
+    absolute: true,
+    cwd: __dirname,
+  })
+  matches.forEach((match) => delete require.cache[match])
+
+  const configuration: Partial<IConfiguration> = {
+    ...cucumberOptions,
+    format: [join(__dirname, '..', 'src')],
+    formatOptions: {
+      colorsEnabled: false,
+      theme: {},
+      ...formatOptions,
+    },
+    paths: [join('test', 'features', fileName)],
+    publishQuiet: true,
+    require: [join(__dirname, 'features')],
   }
-  const args = [
-    '--publish-quiet',
-    '--require',
-    join(__dirname, 'features'),
-    '--format',
-    join(__dirname, '..', 'src'),
-    '--format-options',
-    JSON.stringify({ colorsEnabled, theme }),
-  ]
-  if (options['--name']) args.push('--name', options['--name'])
-  if (options['--tags']) args.push('--tags', options['--tags'].join(','))
-
-  return exec(throws, ...args, join('test', 'features', fileName)).replace(
-    /\d+m\d+\.\d+s/g,
-    '0m00.000s'
-  )
-}
-
-const exec = (throws: boolean, ...args: string[]): string => {
-  if (process.env.LOG_CUCUMBER_RUN) console.log(`${cmd} ${args.join(' ')}`)
-
-  let stdout: string
+  const { runConfiguration } = await loadConfiguration({
+    provided: configuration,
+  })
+  const stdout = new PassThrough()
+  const stderr = new PassThrough()
   try {
-    stdout = execFileSync(cmd, args, { stdio: 'pipe' }).toString()
-  } catch (error) {
-    stdout = error.stdout.toString()
-    if (throws) throw error
+    await runCucumber(runConfiguration, {
+      cwd: join(__dirname, '..', '..'),
+      stdout,
+      stderr,
+    })
+  } catch (ex) {
+    if (throws) {
+      throw ex
+    }
   }
-
-  if (process.env.LOG_CUCUMBER_RUN) console.log(stdout)
-  return stdout
+  stdout.end()
+  stderr.end()
+  const result = await streamToString(stdout)
+  return result.replace(/\d+m\d+\.\d+s/g, '0m00.000s')
 }

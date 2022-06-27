@@ -3,8 +3,9 @@ import 'should'
 import { run } from './exec'
 
 describe('Description', () => {
-  it('logs feature descriptions', () => {
-    run('description.feature').should.startWith(
+  it('logs feature descriptions', async () => {
+    const result = await run('description.feature')
+    result.should.startWith(
       'Feature: Description # test/features/description.feature:1\n' +
         '\n' +
         '  **I like**\n' +
@@ -14,8 +15,9 @@ describe('Description', () => {
     )
   })
 
-  it('does not log scenario descriptions', () => {
-    run('description.feature').should.containEql(
+  it('does not log scenario descriptions', async () => {
+    const result = await run('description.feature')
+    result.should.containEql(
       '  Scenario: Description scenario # test/features/description.feature:7\n' +
         '    When noop\n' +
         '    Then noop\n' +

@@ -3,8 +3,9 @@ import 'should'
 import { run } from './exec'
 
 describe('Feature', () => {
-  it('logs feature names and inserts new lines between scenarios and features', () => {
-    run('*.feature', { '--name': 'Feature \\d' }).should.startWith(
+  it('logs feature names and inserts new lines between scenarios and features', async () => {
+    const result = await run('*.feature', { name: ['Feature \\d'] })
+    result.should.startWith(
       'Feature: The Feature # test/features/feature.feature:1\n' +
         '\n' +
         '  Scenario: Feature 1 # test/features/feature.feature:7\n' +
