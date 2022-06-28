@@ -64,6 +64,25 @@ The customisable theme items are:
 
 You can combine all the styles you'd like from [modifiers, foreground colors and background colors exposed by ansi-styles](https://github.com/chalk/ansi-styles#styles).
 
+### Extending the Default Theme
+
+If you just want to tweak a few things about the default theme without redefining it entirely, you can grab the default theme in your `cucumber.js` config file and use it as the base for yours:
+
+```js
+const { DEFAULT_THEME } = require('@cucumber/pretty-formatter')
+
+module.exports = {
+  default: {
+    formatOptions: {
+      theme: {
+        ...DEFAULT_THEME,
+        'step text': 'magenta'
+      }
+    }
+  }
+}
+```
+
 ### Example Themes
 
 #### _Matrix_

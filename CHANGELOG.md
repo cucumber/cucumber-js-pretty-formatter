@@ -13,6 +13,7 @@ Please visit [cucumber/CONTRIBUTING.md](https://github.com/cucumber/cucumber/blo
 ## [Unreleased] (In Git)
 
 ### Added
+- Export default theme to make configuration easier ([#16](https://github.com/cucumber/cucumber-js-pretty-formatter/pull/16))
 
 ### Changed
 

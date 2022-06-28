@@ -30,27 +30,6 @@ const marks = {
   [Status.UNKNOWN]: '?',
 }
 
-const defaultThemeStyles: ThemeStyles = {
-  [ThemeItem.DataTable]: [],
-  [ThemeItem.DataTableBorder]: ['gray'],
-  [ThemeItem.DataTableContent]: ['gray', 'italic'],
-  [ThemeItem.DocStringContent]: ['gray', 'italic'],
-  [ThemeItem.DocStringDelimiter]: ['gray'],
-  [ThemeItem.FeatureDescription]: ['gray'],
-  [ThemeItem.FeatureKeyword]: ['blueBright', 'bold'],
-  [ThemeItem.FeatureName]: ['blueBright', 'underline'],
-  [ThemeItem.Location]: ['dim'],
-  [ThemeItem.RuleKeyword]: ['blueBright', 'bold'],
-  [ThemeItem.RuleName]: ['blueBright', 'underline'],
-  [ThemeItem.ScenarioKeyword]: ['cyan', 'bold'],
-  [ThemeItem.ScenarioName]: ['cyan', 'underline'],
-  [ThemeItem.StepKeyword]: ['cyan'],
-  [ThemeItem.StepMessage]: [],
-  [ThemeItem.StepStatus]: [],
-  [ThemeItem.StepText]: [],
-  [ThemeItem.Tag]: ['cyan'],
-}
-
 const themeItemIndentations: { [key in ThemeItem]: number } = {
   [ThemeItem.DataTable]: 6,
   [ThemeItem.DataTableBorder]: 0,
@@ -72,6 +51,27 @@ const themeItemIndentations: { [key in ThemeItem]: number } = {
   [ThemeItem.Tag]: 0,
 }
 
+export const DEFAULT_THEME: ThemeStyles = {
+  [ThemeItem.DataTable]: [],
+  [ThemeItem.DataTableBorder]: ['gray'],
+  [ThemeItem.DataTableContent]: ['gray', 'italic'],
+  [ThemeItem.DocStringContent]: ['gray', 'italic'],
+  [ThemeItem.DocStringDelimiter]: ['gray'],
+  [ThemeItem.FeatureDescription]: ['gray'],
+  [ThemeItem.FeatureKeyword]: ['blueBright', 'bold'],
+  [ThemeItem.FeatureName]: ['blueBright', 'underline'],
+  [ThemeItem.Location]: ['dim'],
+  [ThemeItem.RuleKeyword]: ['blueBright', 'bold'],
+  [ThemeItem.RuleName]: ['blueBright', 'underline'],
+  [ThemeItem.ScenarioKeyword]: ['cyan', 'bold'],
+  [ThemeItem.ScenarioName]: ['cyan', 'underline'],
+  [ThemeItem.StepKeyword]: ['cyan'],
+  [ThemeItem.StepMessage]: [],
+  [ThemeItem.StepStatus]: [],
+  [ThemeItem.StepText]: [],
+  [ThemeItem.Tag]: ['cyan'],
+}
+
 export default class PrettyFormatter extends SummaryFormatter {
   private uri?: string
   private lastRuleId?: string
@@ -88,7 +88,7 @@ export default class PrettyFormatter extends SummaryFormatter {
     super(options)
     const theme = makeTheme(
       !!options.parsedArgvOptions.colorsEnabled
-        ? options.parsedArgvOptions.theme || defaultThemeStyles
+        ? options.parsedArgvOptions.theme || DEFAULT_THEME
         : {}
     )
 
