@@ -8,7 +8,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Please see [CONTRIBUTING.md](https://github.com/cucumber/cucumber/blob/master/CONTRIBUTING.md) on how to contribute to Cucumber.
 
 ## Unreleased
-
 ### Added
 - Export default theme to make configuration easier ([#16](https://github.com/cucumber/cucumber-js-pretty-formatter/pull/16))
 
@@ -22,11 +21,11 @@ Please see [CONTRIBUTING.md](https://github.com/cucumber/cucumber/blob/master/CO
 
 ## [v1.0.0-alpha.0]
 ### Changed
-* Thank you Ilya for the work you've done! The objective of this fork is to provide Cucumber users with an officially supported pretty formatter for Cucumber.js.
-* This is the first version of the pretty formatter that supports Cucumber.js 7.0.0 and above, now based on [cucumber-messages](https://github.com/cucumber/cucumber/tree/master/messages) (instead of the now deceased event protocol).
-* All the codebase has been migrated to TypeScript, yey!
-* The pretty formatter can now be customised! Ansi styles can be applied to almost all elements of the output.
-* The latest addition to the Gherkin syntax, the `Rule` keyword, is supported.
+- Thank you Ilya for the work you've done! The objective of this fork is to provide Cucumber users with an officially supported pretty formatter for Cucumber.js.
+- This is the first version of the pretty formatter that supports Cucumber.js 7.0.0 and above, now based on [cucumber-messages](https://github.com/cucumber/cucumber/tree/master/messages) (instead of the now deceased event protocol).
+- All the codebase has been migrated to TypeScript, yey!
+- The pretty formatter can now be customised! Ansi styles can be applied to almost all elements of the output.
+- The latest addition to the Gherkin syntax, the `Rule` keyword, is supported.
 
 [1.0.0-alpha.2]: https://github.com/cucumber/cucumber-pretty-formatter/compare/v1.0.0-alpha.1...v1.0.0-alpha.2
 [1.0.0-alpha.1]: https://github.com/cucumber/cucumber-pretty-formatter/compare/v1.0.0-alpha.0...v1.0.0-alpha.1
