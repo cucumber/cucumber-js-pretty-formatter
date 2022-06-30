@@ -20,7 +20,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "build:clean:tests": "find lib/src -type f -name '*.spec.*' -exec rm {} +",
+    "build:clean:tests": "rm -rf lib/test",
     "build:clean": "rm -rf lib",
     "build:release": "npm run build && npm run test:nobuild && npm run build:clean:tests",
     "build:watch": "tsc -p tsconfig.node.json --watch",
