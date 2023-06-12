@@ -1,6 +1,6 @@
 import 'should'
 
-import { run } from './exec'
+import { run } from './exec.js'
 
 describe('Doc String', () => {
   it('logs doc strings', async () => {

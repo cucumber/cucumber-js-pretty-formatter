@@ -1,6 +1,6 @@
 import 'should'
 
-import { run } from './exec'
+import { run } from './exec.js'
 
 describe('Tag', () => {
   it('log feature tags', async () => {

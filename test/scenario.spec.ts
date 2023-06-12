@@ -1,6 +1,6 @@
 import 'should'
 
-import { run } from './exec'
+import { run } from './exec.js'
 
 describe('Scenario', () => {
   it('logs scenario names', async () => {

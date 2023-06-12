@@ -1,6 +1,6 @@
 import 'should'
 
-import { run } from './exec'
+import { run } from './exec.js'
 
 describe('Internationalization', () => {
   it('logs French', async () => {

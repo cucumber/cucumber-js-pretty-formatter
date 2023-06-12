@@ -1,6 +1,6 @@
 import 'should'
 
-import { run } from './exec'
+import { run } from './exec.js'
 
 describe('Feature', () => {
   it('logs feature names and inserts new lines between scenarios and features', async () => {

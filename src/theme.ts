@@ -1,5 +1,5 @@
-import { indentStyleText } from './indentStyleText'
-import { TextStyle } from './styleText'
+import { indentStyleText } from './indentStyleText.js'
+import { TextStyle } from './styleText.js'
 
 export enum ThemeItem {
   DataTable = 'datatable',

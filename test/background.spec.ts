@@ -1,8 +1,8 @@
 import 'should'
 
-import { run } from './exec'
+import { run } from './exec.js'
 
-describe('Background', () => {
+describe.only('Background', () => {
   it('does not log backgrounds', async () => {
     const result = await run('background.feature')
     result.should.startWith(

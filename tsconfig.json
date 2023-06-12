@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "none",
+    "module": "esnext",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "noImplicitReturns": true,

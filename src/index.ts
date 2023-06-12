@@ -6,11 +6,11 @@ import {
 } from '@cucumber/cucumber'
 import * as messages from '@cucumber/messages'
 import * as CliTable3 from 'cli-table3'
-import { cross, tick } from 'figures'
+import figures from 'figures'
 import { EOL as n } from 'os'
 import dedent from 'ts-dedent'
 
-import { makeTheme, ThemeItem, ThemeStyles } from './theme'
+import { makeTheme, ThemeItem, ThemeStyles } from './theme.js'
 
 const { formatLocation, GherkinDocumentParser, PickleParser } = formatterHelpers
 const {
@@ -21,9 +21,9 @@ const {
 const { getPickleStepMap } = PickleParser
 
 const marks = {
-  [Status.AMBIGUOUS]: cross,
-  [Status.FAILED]: cross,
-  [Status.PASSED]: tick,
+  [Status.AMBIGUOUS]: figures.cross,
+  [Status.FAILED]: figures.cross,
+  [Status.PASSED]: figures.tick,
   [Status.PENDING]: '?',
   [Status.SKIPPED]: '-',
   [Status.UNDEFINED]: '?',

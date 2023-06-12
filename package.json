@@ -11,6 +11,7 @@
     "Julien Biezemans <jb@jbpros.com>"
   ],
   "license": "MIT",
+  "type": "module",
   "main": "lib/src/index.js",
   "types": "lib/src/index.d.ts",
   "files": [
@@ -35,9 +36,9 @@
     "update-dependencies": "npx npm-check-updates --upgrade --dep prod,dev,optional,bundle"
   },
   "dependencies": {
-    "ansi-styles": "^5.0.0",
+    "ansi-styles": "^6.2.1",
     "cli-table3": "^0.6.0",
-    "figures": "^3.2.0",
+    "figures": "^5.0.0",
     "ts-dedent": "^2.0.0"
   },
   "peerDependencies": {

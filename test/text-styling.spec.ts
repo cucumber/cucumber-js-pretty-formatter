@@ -1,9 +1,9 @@
 import 'should'
 
-import { indentStyleText } from '../src/indentStyleText'
-import { styleText, TextStyle } from '../src/styleText'
-import { ThemeItem, ThemeStyles } from '../src/theme'
-import { run } from './exec'
+import { indentStyleText } from '../src/indentStyleText.js'
+import { styleText, TextStyle } from '../src/styleText.js'
+import { ThemeItem, ThemeStyles } from '../src/theme.js'
+import { run } from './exec.js'
 
 describe('Text styling', () => {
   const runColored = (

@@ -1,7 +1,7 @@
 import 'should'
 
-import { indentStyleText } from './indentStyleText'
-import { styleText } from './styleText'
+import { indentStyleText } from './indentStyleText.js'
+import { styleText } from './styleText.js'
 
 describe('indentStyleText', () => {
   it('leaves text unstyled', () => {

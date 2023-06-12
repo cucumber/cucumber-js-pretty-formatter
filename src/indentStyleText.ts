@@ -1,4 +1,4 @@
-import { styleText, TextStyle } from './styleText'
+import { styleText, TextStyle } from './styleText.js'
 
 export const indentStyleText = (
   indent: number,

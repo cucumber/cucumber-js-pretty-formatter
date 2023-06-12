@@ -1,12 +1,12 @@
 import 'should'
-import { styleText } from './styleText'
+import { styleText } from './styleText.js'
 
 import {
   IndentStyleThemeItem,
   makeTheme,
   ThemeItem,
   ThemeStyles,
-} from './theme'
+} from './theme.js'
 
 describe('Theme', () => {
   let styleThemeItem: IndentStyleThemeItem

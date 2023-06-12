@@ -1,12 +1,11 @@
-import {
+import ansi, {
   BackgroundColor,
-  bgColor,
-  color,
   CSPair,
   ForegroundColor,
-  modifier,
   Modifier,
 } from 'ansi-styles'
+
+const { bgColor, color, modifier } = ansi
 
 export type TextStyle =
   | keyof BackgroundColor

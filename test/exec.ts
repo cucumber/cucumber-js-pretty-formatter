@@ -3,7 +3,7 @@ import {
   loadConfiguration,
   runCucumber,
 } from '@cucumber/cucumber/api'
-import * as glob from 'glob'
+import glob from 'glob'
 import { join } from 'path'
 import { PassThrough } from 'stream'
 import * as streamToString from 'stream-to-string'
@@ -50,15 +50,14 @@ export const run = async (
     await runCucumber(runConfiguration, {
       cwd: join(__dirname, '..', '..'),
       stdout,
-      stderr,
+      stderr: process.stderr,
     })
   } catch (ex) {
-    if (throws) {
-      throw ex
-    }
+    throw ex
   }
   stdout.end()
   stderr.end()
   const result = await streamToString(stdout)
+  console.log({result})
   return result.replace(/\d+m\d+\.\d+s/g, '0m00.000s')
 }

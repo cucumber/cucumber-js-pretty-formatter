@@ -1,6 +1,6 @@
 import 'should'
 
-import { styleText } from './styleText'
+import { styleText } from './styleText.js'
 
 describe('styleText()', () => {
   it('applies modifiers', () => {
