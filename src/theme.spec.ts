@@ -205,8 +205,9 @@ describe('Theme', () => {
   })
 
   it('allows some defined and some missing styles', () => {
-    styleThemeItem = makeTheme({ [ThemeItem.FeatureKeyword]: ['red'] })
-      .indentStyleText
+    styleThemeItem = makeTheme({
+      [ThemeItem.FeatureKeyword]: ['red'],
+    }).indentStyleText
     styleThemeItem(0, ThemeItem.FeatureKeyword, 'Feature').should.containEql(
       styleText('Feature', 'red')
     )

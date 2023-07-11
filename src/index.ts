@@ -13,11 +13,8 @@ import dedent from 'ts-dedent'
 import { makeTheme, ThemeItem, ThemeStyles } from './theme'
 
 const { formatLocation, GherkinDocumentParser, PickleParser } = formatterHelpers
-const {
-  getGherkinExampleRuleMap,
-  getGherkinScenarioMap,
-  getGherkinStepMap,
-} = GherkinDocumentParser
+const { getGherkinExampleRuleMap, getGherkinScenarioMap, getGherkinStepMap } =
+  GherkinDocumentParser
 const { getPickleStepMap } = PickleParser
 
 const marks = {
@@ -148,10 +145,8 @@ export default class PrettyFormatter extends SummaryFormatter {
   }
 
   private onTestCaseStarted(testCaseStarted: messages.TestCaseStarted) {
-    const {
-      gherkinDocument,
-      pickle,
-    } = this.eventDataCollector.getTestCaseAttempt(testCaseStarted.id || '')
+    const { gherkinDocument, pickle } =
+      this.eventDataCollector.getTestCaseAttempt(testCaseStarted.id || '')
     const { feature } = gherkinDocument
     if (this.uri !== gherkinDocument.uri && feature) {
       this.indentOffset = 0
@@ -174,13 +169,10 @@ export default class PrettyFormatter extends SummaryFormatter {
   }
 
   private onTestStepStarted(testStepStarted: messages.TestStepStarted) {
-    const {
-      gherkinDocument,
-      pickle,
-      testCase,
-    } = this.eventDataCollector.getTestCaseAttempt(
-      testStepStarted.testCaseStartedId || ''
-    )
+    const { gherkinDocument, pickle, testCase } =
+      this.eventDataCollector.getTestCaseAttempt(
+        testStepStarted.testCaseStartedId || ''
+      )
 
     const pickleStepMap = getPickleStepMap(pickle)
     const gherkinStepMap = getGherkinStepMap(gherkinDocument)
