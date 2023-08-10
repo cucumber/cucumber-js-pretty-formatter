@@ -3,11 +3,10 @@ import {
   loadConfiguration,
   runCucumber,
 } from '@cucumber/cucumber/api'
-import * as glob from 'glob'
+import { glob } from 'glob'
 import { join } from 'path'
 import { PassThrough } from 'stream'
 import * as streamToString from 'stream-to-string'
-import { promisify } from 'util'
 
 import { ThemeStyles } from '../src/theme'
 
@@ -23,7 +22,7 @@ export const run = async (
   throws = false
 ): Promise<string> => {
   // clear require cache for support code
-  const matches = await promisify(glob)('features/support/*', {
+  const matches = await glob('features/support/*', {
     absolute: true,
     cwd: __dirname,
   })
