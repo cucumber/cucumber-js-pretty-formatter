@@ -7,7 +7,6 @@ import { glob } from 'glob'
 import { join } from 'path'
 import { PassThrough } from 'stream'
 import * as streamToString from 'stream-to-string'
-import { promisify } from 'util'
 
 import { ThemeStyles } from '../src/theme'
 
