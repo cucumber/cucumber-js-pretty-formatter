@@ -3,7 +3,7 @@ import {
   loadConfiguration,
   runCucumber,
 } from '@cucumber/cucumber/api'
-import * as glob from 'glob'
+import { glob } from 'glob'
 import { join } from 'path'
 import { PassThrough } from 'stream'
 import * as streamToString from 'stream-to-string'
