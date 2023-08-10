@@ -23,7 +23,7 @@ export const run = async (
   throws = false
 ): Promise<string> => {
   // clear require cache for support code
-  const matches = await promisify(glob)('features/support/*', {
+  const matches = await glob('features/support/*', {
     absolute: true,
     cwd: __dirname,
   })
