@@ -6,7 +6,7 @@ import {
 } from '@cucumber/cucumber'
 import * as messages from '@cucumber/messages'
 import * as CliTable3 from 'cli-table3'
-import { cross, tick } from 'figures'
+import { mainSymbols as figures } from 'figures'
 import { EOL as n } from 'os'
 import dedent from 'ts-dedent'
 
@@ -16,6 +16,7 @@ const { formatLocation, GherkinDocumentParser, PickleParser } = formatterHelpers
 const { getGherkinExampleRuleMap, getGherkinScenarioMap, getGherkinStepMap } =
   GherkinDocumentParser
 const { getPickleStepMap } = PickleParser
+const { cross, tick } = figures
 
 const marks = {
   [Status.AMBIGUOUS]: cross,
