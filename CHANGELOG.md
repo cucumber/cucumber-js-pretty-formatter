@@ -11,7 +11,7 @@ Please see [CONTRIBUTING.md](https://github.com/cucumber/cucumber/blob/master/CO
 ### Fixed
 - Correct repo URL in `package.json`
 
-## 1.0.0 - 2022-06-30
+## [1.0.0] - 2022-06-30
 ### Added
 - Export default theme to make configuration easier ([#16](https://github.com/cucumber/cucumber-js-pretty-formatter/pull/16))
 
@@ -31,6 +31,7 @@ Please see [CONTRIBUTING.md](https://github.com/cucumber/cucumber/blob/master/CO
 - The pretty formatter can now be customised! Ansi styles can be applied to almost all elements of the output.
 - The latest addition to the Gherkin syntax, the `Rule` keyword, is supported.
 
+[1.0.0]: https://github.com/cucumber/cucumber-pretty-formatter/compare/v1.0.0-alpha.2...v1.0.0
 [1.0.0-alpha.2]: https://github.com/cucumber/cucumber-pretty-formatter/compare/v1.0.0-alpha.1...v1.0.0-alpha.2
 [1.0.0-alpha.1]: https://github.com/cucumber/cucumber-pretty-formatter/compare/v1.0.0-alpha.0...v1.0.0-alpha.1
 [v1.0.0-alpha.0]: https://github.com/cucumber/cucumber-pretty-formatter/compare/03f000d68098f854b9596f812a474857df675491...v1.0.0-alpha.0
