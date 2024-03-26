@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Please see [CONTRIBUTING.md](https://github.com/cucumber/cucumber/blob/master/CONTRIBUTING.md) on how to contribute to Cucumber.
 
 ## Unreleased
+
+## 1.0.1 - 2024-03-26
 ### Fixed
 - Correct repo URL in `package.json`
 
