@@ -34,7 +34,7 @@
     "test": "npm run build && npm run test:mocha"
   },
   "dependencies": {
-    "ansi-styles": "^5.0.0",
+    "ansi-styles": "^6.0.0",
     "cli-table3": "^0.6.0",
     "figures": "^3.2.0",
     "ts-dedent": "^2.0.0"
