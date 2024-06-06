@@ -32,7 +32,6 @@
     "test:mocha": "mocha",
     "test:nobuild": "npm run test:mocha",
     "test": "npm run build && npm run test:mocha",
-    "update-dependencies": "npx npm-check-updates --upgrade --dep prod,dev,optional,bundle"
   },
   "dependencies": {
     "ansi-styles": "^5.0.0",
