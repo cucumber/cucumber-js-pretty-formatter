@@ -31,7 +31,7 @@
     "test:mocha:wip": "mocha -g wip",
     "test:mocha": "mocha",
     "test:nobuild": "npm run test:mocha",
-    "test": "npm run build && npm run test:mocha",
+    "test": "npm run build && npm run test:mocha"
   },
   "dependencies": {
     "ansi-styles": "^5.0.0",
