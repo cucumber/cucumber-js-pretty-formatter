@@ -1,3 +1,8 @@
+⚠️⚠️⚠️  
+This repository is now archived. The current pretty formatter for JavaScript and other platforms can be found at:  
+https://github.com/cucumber/pretty-formatter  
+⚠️⚠️⚠️
+
 # Official Cucumber.js Pretty Formatter
 
 [![build][build-badge]][build]
